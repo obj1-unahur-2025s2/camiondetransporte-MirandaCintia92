@@ -1,17 +1,25 @@
 object nightRider{
-
+    method peso = 500
+    method peligrosidad = 10
+    method esPesoPar() = self.peso().even()
+    method bultos() = 1
+    method unaCosa.consecuenciasDeLaCarga(){}
 }
 
 
 
 
-object cosas {
-    
+object bumblee {
+    var esAuto = true
+    method peso() = 800
+    method transformateEnAuto(){
+        esAuto = true
+    }
+    method bultos() = 2
+    method unaCosa.consecuenciasDeLaCarga(){
+        self.transformateEnRobot()
+    }
 }
-
-
-
-
 
 
 
@@ -19,12 +27,23 @@ object cosas {
 object ladrillos {
     var cantidad = 10
     method cantidad(nuevacantidad){
-    cantidad = nuevacantidad
+    cantidad = nuevacantidad.max(0)
     }
   method peso() = 2 * cantidad
     method peligrosidad() = 2
     method esPesoPar() = self.peso().even()//poner esto en todos los objetos
+    
+    method bultos() {
+        return
+        if(cantidad <= 100){1}
+        else if(cantidad.between(101, 300)){2}
+        else{3}
     }
+    method consecuenciasDeLaCarga(){
+        cantidad += 12 //cantidad = cantidad +12
+    }
+    }
+    
 
 
 object arena {
@@ -39,6 +58,10 @@ object arena {
     // 
     method peligrosidad() = 1
     method esPesoPar() = self.peso().even()
+    method bultos() = 1
+    method consecuenciasDeLaCarga(){
+        peso = (peso - 10).max(0)
+    }
 }
 
 
@@ -54,6 +77,12 @@ object bateriaAntiaerea{
     method peso() = if(estaConMisiles) 300 else 200
     method peligrosidad() = if(estaConMisiles) 100 else 0
     method esPesoPar() = self.peso().even()
+    method bultos() = if(estaConMisiles){2}
+    else 1
+
+    method consecuenciaDeLacarga(){
+        self.cargarMisiles()
+    }
 }
 
 object contenedor {
@@ -78,6 +107,11 @@ method quitarCosa(unaCosa){
     //busco al objeto mas "peligroso" y le pido su peligrosidad.
     }
     method esPesoPar() = self.peso().even()
+    method bultos() =   1 + cosasAdentro.sum({c => c.bultos()}) //la suma de las cosas de los bultos +1
+
+        method consecuenciaDeLacarga(){
+        cosasAdentro.forEach({c => c.consecuenciaDeLacarga()})
+    }
 }
 
 //ctrl + click para ver ejemplos de por ej "sum" - sobre sum
@@ -100,7 +134,10 @@ object embalaje {
 
     method esPesoPar() = self.peso().even()
 
+    method bultos() = 2
+    method consecuenciaDeLaCarga(){
 
+    }
 }
 /*
 object nada{
@@ -109,68 +146,3 @@ object nada{
     method esPesoPar() = self.peso().even()
 } para object embalaje puedo inicializarlo con var cosaEnvuelta = nada pero tengo que crear este objeto
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

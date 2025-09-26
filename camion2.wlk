@@ -3,6 +3,7 @@ object camion {
     const carga = []
     method cargar(unaCosa){
         carga.add(unaCosa)
+        unaCosa.consecuenciasDeLaCarga()// todos los objetos tienen que saber entender este mensaje, es polimorfico.
     }
     method descargar(unaCosa){
         carga.remove(unaCosa)
@@ -48,18 +49,6 @@ method laCosaMasPesada(){
     return 
     carga.max({c => c.peso()}) //transforma la coleccion carga en una lista de otra cosa (de peso) el metodo max me va a devolver el objeto que tiene el valor max transformado
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
