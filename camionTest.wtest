@@ -14,7 +14,7 @@ method initialize(){
 
 } // initialize cuando quiero que los test arranquen todos con esto cargado
   test "el camion tiene un peso total de 1720" {
-    assert.equals(1720, camion.PespTotal())
+    assert.equals(1720, camion.PesoTotal())
   }
 
 test "puede circular el camion" {

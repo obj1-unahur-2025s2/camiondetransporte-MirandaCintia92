@@ -12,11 +12,12 @@ object nightRider{
 object bumblee {
     var esAuto = true
     method peso() = 800
-    method transformateEnAuto(){
+    method transformateEnRobot(){
         esAuto = true
     }
-    method bultos() = 2
-    method unaCosa.consecuenciasDeLaCarga(){
+    method bultos() = {2}
+
+    method consecuenciasDeLaCarga(){
         self.transformateEnRobot()
     }
 }
